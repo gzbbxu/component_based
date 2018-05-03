@@ -1,5 +1,6 @@
 package com.example.administrator.component_based;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -11,9 +12,13 @@ import android.view.MenuItem;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.base.RouterConstants;
+import com.example.base.module.module1.Module1Service;
+import com.example.base.module.module2.Module2Service;
+import com.example.base.module.module3.Module3Service;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     private ViewPager mPager;
@@ -76,17 +81,33 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void selectTab(int position) {
+        mPager.setCurrentItem(position);
+    }
+
     private void initViewPager() {
 
-
-        Fragment module1 = (Fragment) ARouter.getInstance().build(RouterConstants.MODULE1_HOME).navigation();
+        //这两种方式都可以。
+        /*Fragment module1 = (Fragment) ARouter.getInstance().build(IModule1Provider.MODULE1_HOME).navigation();
         Fragment module2 = (Fragment) ARouter.getInstance().build(RouterConstants.MODULE2_HOME).navigation();
-        Fragment module3 = (Fragment) ARouter.getInstance().build(RouterConstants.MODULE3_HOME).navigation();
+        Fragment module3 = (Fragment) ARouter.getInstance().build(RouterConstants.MODULE3_HOME).navigation();*/
+
+        Fragment module1 = Module1Service.getModule1Fragment("", "");
+        Fragment module2 = Module2Service.getModule2Fragment("", "");
+        Fragment module3 = Module3Service.getModule3Fragment("", "");
         mFragments.add(module1);
         mFragments.add(module2);
         mFragments.add(module3);
 
         mAdapter = new FragmentAdapter(getSupportFragmentManager(), mFragments);
         mPager.setAdapter(mAdapter);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        for (Fragment fragment : mFragments) {
+            fragment.onActivityResult(requestCode, resultCode, data);
+        }
     }
 }

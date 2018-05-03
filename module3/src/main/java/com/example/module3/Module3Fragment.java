@@ -5,11 +5,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.base.RouterConstants;
+import com.example.base.module.home.HomeService;
+import com.example.base.provider.IModule3Provider;
 
-@Route(path = RouterConstants.MODULE3_HOME)
+@Route(path = IModule3Provider.MODULE3_HOME)
 public class Module3Fragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     private static final String ARG_PARAM1 = "param1";
@@ -17,6 +19,7 @@ public class Module3Fragment extends Fragment {
 
     private String mParam1;
     private String mParam2;
+    private TextView btn_tv1,btn_tv2;
 
 
     public Module3Fragment() {
@@ -44,8 +47,25 @@ public class Module3Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_module3, container, false);
+        View view = inflater.inflate(R.layout.fragment_module3, container, false);
+        btn_tv1 = view.findViewById(R.id.btn_tv1);
+        btn_tv2 = view.findViewById(R.id.btn_tv2);
+        btn_tv1.setOnClickListener(clickListener);
+        btn_tv2.setOnClickListener(clickListener);
+        return  view;
     }
+
+    View.OnClickListener clickListener = new View.OnClickListener(){
+
+        @Override
+        public void onClick(View view) {
+            if(view.getId()==btn_tv1.getId()){
+                HomeService.selectTab(getActivity(),0);
+            }else if(view.getId() == btn_tv2.getId()){
+                HomeService.selectTab(getActivity(),1);
+            }
+        }
+    };
 
 
 }

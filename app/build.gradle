@@ -52,5 +52,6 @@ dependencies {
         implementation project(':module2')
         implementation project(':module3')
         implementation project(':loginmodule')
+        implementation project(':detailmodule')
     }
 }

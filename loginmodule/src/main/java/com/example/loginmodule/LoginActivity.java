@@ -1,5 +1,7 @@
 package com.example.loginmodule;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,8 +10,9 @@ import android.widget.EditText;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.base.RouterConstants;
+import com.example.base.provider.ILoginProvider;
 
-@Route(path = RouterConstants.LOGIN_MODULE)
+@Route(path = ILoginProvider.LOGIN_MAIN_ACTIVITY)
 public class LoginActivity extends AppCompatActivity {
     private EditText et_user, et_pwd;
     private Button btn_login;
@@ -26,6 +29,11 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String etuser = et_user.getText().toString();
                 String etpwd = et_pwd.getText().toString();
+                Intent intent = new Intent();
+                intent.putExtra("name",etuser);
+                intent.putExtra("pwd",etpwd);
+                setResult(Activity.RESULT_OK, intent);
+                finish();
 
             }
         });

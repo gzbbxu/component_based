@@ -12,9 +12,10 @@
 
 
     <TextView
+        android:layout_marginTop="50dp"
         android:id="@+id/btn_login"
         android:layout_width="wrap_content"
-        android:text="没有登录，点击登录"
+        android:text="登录拦截器 有登录直接详情，没登录进入登录"
         android:layout_height="wrap_content" />
 
 </FrameLayout>

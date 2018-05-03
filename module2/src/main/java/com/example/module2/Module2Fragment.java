@@ -8,8 +8,9 @@ import android.view.ViewGroup;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.base.RouterConstants;
+import com.example.base.provider.IModule2Provider;
 
-@Route(path = RouterConstants.MODULE2_HOME)
+@Route(path = IModule2Provider.MODULE2_HOME)
 public class Module2Fragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
